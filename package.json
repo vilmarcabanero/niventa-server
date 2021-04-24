@@ -1,0 +1,19 @@
+{
+  "name": "niventa-server",
+  "version": "1.0.0",
+  "description": "This is backend of niventa e-commerce project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecommerce",
+    "mern",
+    "project",
+    "backend",
+    "api",
+    "api"
+  ],
+  "author": "Vilmar Cabañero",
+  "license": "MIT"
+}
