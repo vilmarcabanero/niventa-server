@@ -12,14 +12,14 @@ env.config()
 
 //mongodb connection
 //mongodb+srv://<username>:<password>@entropiya-free-cluster.vo2hc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@entropiya-free-cluster.vo2hc.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`
 mongoose
-	.connect(
-		`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@entropiya-free-cluster.vo2hc.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
-		{
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		}
-	)
+	.connect(CONNECTION_URL, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+	})
 	.then(() => {
 		console.log('Database connected')
 	})
