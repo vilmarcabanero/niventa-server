@@ -5,7 +5,7 @@ const shortid = require("shortid");
 
 const generateJwtToken = (_id, role) => {
   return jwt.sign({ _id, role }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: process.env.JWT_TOKEN_EXPIRE,
   });
 };
 
@@ -64,11 +64,19 @@ exports.signin = (req, res) => {
         });
       } else {
         return res.status(400).json({
-          message: "Something went wrong",
+          message: "Invalid password.",
         });
       }
     } else {
-      return res.status(400).json({ message: "Something went wrong" });
+      return res.status(400).json({ message: "User does not exist." });
     }
   });
 };
+
+exports.requireSignin = (req, res, next) => {
+	const token = req.headers.authorization.split(" ")[1]
+	const user = jwt.verify(token, process.env.JWT_SECRET)
+	
+	req.user = user
+	next()
+}

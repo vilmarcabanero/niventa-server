@@ -37,7 +37,7 @@ exports.signup = (req, res) => {
 
         if (data) {
           return res.status(201).json({
-            message: "Admin created Successfully..!",
+            message: "Admin created successfully.",
           });
         }
       });
@@ -57,7 +57,7 @@ exports.signin = (req, res) => {
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
-          { expiresIn: "1d" }
+          { expiresIn: process.env.JWT_TOKEN_EXPIRE }
         );
         const { _id, firstName, lastName, email, role, fullName } = user;
         res.cookie("token", token, { expiresIn: "1d" });
@@ -71,7 +71,7 @@ exports.signin = (req, res) => {
         });
       }
     } else {
-      return res.status(400).json({ message: "Something went wrong" });
+      return res.status(400).json({ message: "User does not exist" });
     }
   });
 };
